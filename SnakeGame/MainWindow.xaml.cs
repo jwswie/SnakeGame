@@ -26,8 +26,7 @@ namespace SnakeGame
         public MainWindow()
         {
             InitializeComponent();
-            Snake = new Snake(4);
-            f=true;
+            Snake = new Snake(5);
             Task.Run(() => Game());
         }
         private async Task Game() 
@@ -84,9 +83,5 @@ namespace SnakeGame
             
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            f = false;
-        }
     }
 }
