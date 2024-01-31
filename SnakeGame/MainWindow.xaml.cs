@@ -27,19 +27,21 @@ namespace SnakeGame
         {
             InitializeComponent();
             Snake = new Snake(4);
+            f=true;
             Task.Run(() => Game());
         }
         private async Task Game() 
         {
-            for (int i = 0; i < 10; i++)
+            do
             {
                 await Dispatcher.InvokeAsync(() =>
                 {
                     DrawSnake();
                 });
-                await Task.Delay(1000);
-                Snake.MoveSnake();
-            }
+                await Task.Delay(300);
+            } while (Snake.MoveSnake());
+            MessageBox.Show("End of the game");
+            this.Close();
         }
         private void DrawSnake() 
         {
@@ -52,6 +54,39 @@ namespace SnakeGame
                 Grid.SetRow(stackPanel, body.y);
                 MainGrid.Children.Add(stackPanel);
             }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Snake.GetDir() == 1 || Snake.GetDir() == 2)
+            {
+                if (e.Key == Key.W || e.Key == Key.Up)
+                {
+                    Snake.SetDir(0);
+                }
+                if (e.Key == Key.S || e.Key == Key.Down)
+                {
+                    Snake.SetDir(3);
+                }
+            }
+            if (Snake.GetDir() == 0 || Snake.GetDir() == 3)
+            {
+                if (e.Key == Key.A || e.Key == Key.Left)
+                {
+                    Snake.SetDir(1);
+                }
+                if (e.Key == Key.D || e.Key == Key.Right)
+                {
+                    Snake.SetDir(2);
+                }
+            }
+            
+            
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            f = false;
         }
     }
 }

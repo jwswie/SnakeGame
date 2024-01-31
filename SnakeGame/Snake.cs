@@ -8,13 +8,13 @@ namespace SnakeGame
 {
     public class Snake
     {
-        public class Body
+        public class Body //Каждая часть змеи имеет две координаты
         {
             public int x;
             public int y;
         }
-        int dir;
-        public List<Body> SnakeBody { get; set; }
+        int dir { get; set; }// Направление движения змеи
+        public List<Body> SnakeBody { get; set; } //Тело змеи
         public Snake(int BodyLength) 
         {
             SnakeBody = new List<Body>();
@@ -24,7 +24,7 @@ namespace SnakeGame
                 SnakeBody.Add(new Body() { x = 4-i, y = 4 });
             }
         }
-        public void MoveSnake() 
+        public bool MoveSnake() //Движение змейки
         {
 
             switch (dir)
@@ -62,6 +62,18 @@ namespace SnakeGame
                     SnakeBody[0].y +=1;
                     break;
             }
+            for (int i = 1; i < SnakeBody.Count; i++)
+                if (((SnakeBody[0].x == SnakeBody[i].x) && (SnakeBody[0].y == SnakeBody[i].y)) || SnakeBody[0].x == 9 || SnakeBody[0].y == 9 || SnakeBody[0].x == -1 || SnakeBody[0].y == -1)
+                    return false;
+            return true;
+        }
+        public void SetDir(int dir) 
+        {
+            this.dir = dir;
+        }
+        public int GetDir() 
+        {
+            return dir;
         }
     }
 }
