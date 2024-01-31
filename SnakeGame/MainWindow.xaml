@@ -2,5 +2,26 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Snake Game" Height="700" Width="700">
-    <Grid Name="gameGrid" Background="#FF02540E"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя строка которая и будет скорость отображать (score и speed всякий) -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,10,0,0">
+            <TextBlock Text="Score:" FontSize="24" FontFamily="Sitka Banner Semibold" Foreground="black" VerticalAlignment="Top"/>
+            <TextBlock x:Name="scoreText" Text="0" FontSize="24" FontFamily="Sitka Banner Semibold" Foreground="black" VerticalAlignment="Top" Margin="5,0,0,0"/>
+            <TextBlock Text="Speed:" FontSize="24" FontFamily="Sitka Banner Semibold" Foreground="black" VerticalAlignment="Top" Margin="20,0,0,0"/>
+            <TextBlock x:Name="speedText" Text="1" FontSize="24" FontFamily="Sitka Banner Semibold" Foreground="black" VerticalAlignment="Top" Margin="5,0,0,0"/>
+        </StackPanel>
+
+        <!-- Игровое поле (именно нижняя часть) -->
+        <Border Grid.Row="1" BorderBrush="White" BorderThickness="100">
+            <Grid Name="gameGrid" Background="#FF02540E" Margin="-5,0,-20,-35">
+                <!-- Пример элемента змейки (квадрат) -->
+                <Rectangle Fill="Green" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="snakeElement"/>
+            </Grid>
+        </Border>
+    </Grid>
 </Window>
