@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SnakeGame
@@ -23,12 +21,14 @@ namespace SnakeGame
     public partial class MainWindow : Window
     {
         Snake Snake { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
             Snake = new Snake(5);
             Task.Run(() => Game());
         }
+        
         private async Task Game() 
         {
             do
@@ -82,6 +82,5 @@ namespace SnakeGame
             
             
         }
-
     }
 }
