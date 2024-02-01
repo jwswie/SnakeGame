@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SnakeGame.Apple
+namespace SnakeGame
 {
     public class AppleGenerator
     {
         private readonly Random random;
+
         public AppleGenerator()
         {
             random = new Random();
         }
+
         public (int x, int y) Generate(List<(int x, int y)> snakeBody, int maxX, int maxY, int maxAttempts = 100)
         {
             for (int attempt = 0; attempt < maxAttempts; attempt++)

@@ -10,7 +10,9 @@
     <Window.Resources>
 
         <Style TargetType="Button">
-            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Background" Value="White" />
             <Setter Property="FontFamily" Value="Comic Sans MS" />
             <Setter Property="Foreground" Value="Black" />
@@ -36,7 +38,8 @@
             <Button Content="New Game" Click="StartButton_Click" Margin="0" Width="322" Grid.Row="3" Canvas.Left="10" Canvas.Top="208" FontSize="34"/>
             <Button Content="High Score" Click="StartButton_Click" Margin="0" Width="322" Grid.Row="3" Canvas.Left="10" Canvas.Top="308" FontSize="34"/>
             <Button Content="About" Click="StartButton_Click" Margin="0" Width="322" Grid.Row="3" Canvas.Left="10" Canvas.Top="404" FontSize="34"/>
-            <Image Source="C:\\Users\\pktb\\source\\repos\\SnakeGame\\SnakeGame\\Snake.png" Height="409" Width="571" Canvas.Left="228" Canvas.Top="189"/>
+            <Image Source="C:\\Users\\pktb\\source\\repos\\SnakeGame\\SnakeGame\\Snake.png" Height="409" Width="571" Canvas.Left="228" Canvas.Top="255"/>
         </Canvas>
+
     </Grid>
 </Window>

@@ -27,6 +27,7 @@ namespace SnakeGame
         {
             InitializeComponent();
             InitializeGameGrid();
+
             Snake = new Snake(5);
             Task.Run(() => Game());
         }
@@ -82,8 +83,6 @@ namespace SnakeGame
                     Snake.SetDir(2);
                 }
             }
-
-
         }
 
         private void InitializeGameGrid()

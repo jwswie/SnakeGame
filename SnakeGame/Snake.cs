@@ -10,7 +10,7 @@ namespace SnakeGame
             public int y;
         }
 
-        int dir { get; set; }// Направление движения змеи
+        int dir { get; set; } // Направление движения змеи
         public List<Body> SnakeBody { get; set; } // Тело змеи
 
         public Snake(int BodyLength) 
@@ -24,11 +24,11 @@ namespace SnakeGame
             }
         }
 
-        public bool MoveSnake() //Движение змейки
+        public bool MoveSnake() // Движение змейки
         {
             switch (dir)
             {
-                case 0:
+                case 0: // Вперёд
                     for (int i = SnakeBody.Count - 1; i > 0; i--)
                     {
                         SnakeBody[i].y = SnakeBody[i - 1].y;
@@ -37,7 +37,7 @@ namespace SnakeGame
                     SnakeBody[0].y -= 1;
                     break;
 
-                case 1:
+                case 1: // Влево
                     for (int i = SnakeBody.Count - 1; i > 0; i--)
                     {
                         SnakeBody[i].y = SnakeBody[i - 1].y;
@@ -46,7 +46,7 @@ namespace SnakeGame
                     SnakeBody[0].x -= 1;
                     break;
 
-                case 2:
+                case 2: // Вправо
                     for (int i = SnakeBody.Count - 1; i > 0; i--)
                     {
                         SnakeBody[i].y = SnakeBody[i - 1].y;
@@ -55,7 +55,7 @@ namespace SnakeGame
                     SnakeBody[0].x += 1;
                     break;
 
-                case 3:
+                case 3: // Назад
                     for (int i = SnakeBody.Count - 1; i > 0; i--)
                     {
                         SnakeBody[i].y = SnakeBody[i - 1].y;
