@@ -1,13 +1,29 @@
-﻿namespace SnakeGame.Apple
+﻿using System;
+using System.Collections.Generic;
+
+namespace SnakeGame.Apple
 {
     public class AppleGenerator
     {
-        public bool IsCoordinateOnFieldEdge(int x, int y)
+        private readonly Random random;
+        public AppleGenerator()
         {
-            int fieldWidth = 9;
-            int fieldHeight = 9;
+            random = new Random();
+        }
+        public (int x, int y) Generate(List<(int x, int y)> snakeBody, int maxX, int maxY, int maxAttempts = 100)
+        {
+            for (int attempt = 0; attempt < maxAttempts; attempt++)
+            {
+                int x = random.Next(0, maxX);
+                int y = random.Next(0, maxY);
 
-            return x == 0 || x == fieldWidth - 1 || y == 0 || y == fieldHeight - 1;
+                if (!snakeBody.Contains((x, y)))
+                {
+                    return (x, y);
+                }
+            }
+
+            return (-1, -1);
         }
     }
 }
