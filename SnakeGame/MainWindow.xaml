@@ -40,6 +40,5 @@
             <Button Content="About" Click="StartButton_Click" Margin="0" Width="322" Grid.Row="3" Canvas.Left="10" Canvas.Top="404" FontSize="34"/>
             <Image Source="C:\\Users\\pktb\\source\\repos\\SnakeGame\\SnakeGame\\Snake.png" Height="409" Width="571" Canvas.Left="228" Canvas.Top="255"/>
         </Canvas>
-
     </Grid>
 </Window>
