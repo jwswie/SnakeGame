@@ -21,11 +21,69 @@ namespace SnakeGame
     {
         private const int Rows = 9;
         private const int Columns = 9;
+        Snake Snake { get; set; }
 
         public GameWindow()
         {
             InitializeComponent();
             InitializeGameGrid();
+            Snake = new Snake(5);
+            Task.Run(() => Game());
+        }
+
+        private async Task Game()
+        {
+            do
+            {
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    DrawSnake();
+                });
+                await Task.Delay(500);
+            } while (Snake.MoveSnake());
+            MessageBox.Show("End of the game");
+            this.Close();
+        }
+
+        private void DrawSnake()
+        {
+            gameGrid.Children.Clear();
+            foreach (var body in Snake.SnakeBody)
+            {
+                StackPanel stackPanel = new StackPanel();
+                stackPanel.Background = new SolidColorBrush(Colors.Black);
+                Grid.SetColumn(stackPanel, body.x);
+                Grid.SetRow(stackPanel, body.y);
+                gameGrid.Children.Add(stackPanel);
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Snake.GetDir() == 1 || Snake.GetDir() == 2)
+            {
+                if (e.Key == Key.W || e.Key == Key.Up)
+                {
+                    Snake.SetDir(0);
+                }
+                if (e.Key == Key.S || e.Key == Key.Down)
+                {
+                    Snake.SetDir(3);
+                }
+            }
+            if (Snake.GetDir() == 0 || Snake.GetDir() == 3)
+            {
+                if (e.Key == Key.A || e.Key == Key.Left)
+                {
+                    Snake.SetDir(1);
+                }
+                if (e.Key == Key.D || e.Key == Key.Right)
+                {
+                    Snake.SetDir(2);
+                }
+            }
+
+
         }
 
         private void InitializeGameGrid()
@@ -46,7 +104,7 @@ namespace SnakeGame
 
         }
 
-        private Rectangle CreateSnakeSegment(int row, int column)
+       /* private Rectangle CreateSnakeSegment(int row, int column)
         {
             Rectangle segment = new Rectangle
             {
@@ -79,6 +137,6 @@ namespace SnakeGame
         private double CalculateCellSize()
         {
             return gameGrid.ActualWidth / Columns;
-        }
+        }*/
     }
 }
