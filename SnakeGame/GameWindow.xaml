@@ -1,0 +1,30 @@
+﻿<Window x:Class="SnakeGame.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SnakeGame"
+        mc:Ignorable="d"
+        Title="GameWindow" Height="700" Width="700" KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen">
+
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя строка которая и будет скорость отображать (score и speed) -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,10,0,0">
+            <TextBlock x:Name="Score" Text="Score:" FontSize="24" FontFamily="Sitka Banner Semibold" Foreground="black" VerticalAlignment="Top"/>
+            <TextBlock x:Name="scoreText" Text="0" FontSize="24" FontFamily="Sitka Banner Semibold" Foreground="black" VerticalAlignment="Top" Margin="5,0,0,0"/>
+            <TextBlock Text="Speed:" FontSize="24" FontFamily="Sitka Banner Semibold" Foreground="black" VerticalAlignment="Top" Margin="20,0,0,0"/>
+            <TextBlock x:Name="speedText" Text="1" FontSize="24" FontFamily="Sitka Banner Semibold" Foreground="black" VerticalAlignment="Top" Margin="5,0,0,0"/>
+        </StackPanel>
+
+        <!-- Игровое поле (именно нижняя часть) -->
+        <Border Grid.Row="1" BorderBrush="White" BorderThickness="100">
+            <Grid Name="gameGrid" Background="#FF3D9E4B" Margin="-5,0,-20,-35"/>
+        </Border>
+    </Grid>
+
+</Window>
