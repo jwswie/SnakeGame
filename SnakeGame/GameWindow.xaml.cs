@@ -19,8 +19,12 @@ namespace SnakeGame
     /// </summary>
     public partial class GameWindow : Window
     {
+        private int _score;
         private const int Rows = 9;
         private const int Columns = 9;
+        private Random _random = new Random();
+        private Apple _currentApple;
+
         Snake Snake { get; set; }
 
         public GameWindow()
@@ -30,6 +34,8 @@ namespace SnakeGame
 
             Snake = new Snake(5);
             Task.Run(() => Game());
+
+            _score = 0;
         }
 
         private async Task Game()
@@ -49,6 +55,11 @@ namespace SnakeGame
         private void DrawSnake()
         {
             gameGrid.Children.Clear();
+
+            Grid.SetColumn(_currentApple.AppleImage, _currentApple.X);
+            Grid.SetRow(_currentApple.AppleImage, _currentApple.Y);
+            gameGrid.Children.Add(_currentApple.AppleImage);
+
             foreach (var body in Snake.SnakeBody)
             {
                 StackPanel stackPanel = new StackPanel();
@@ -57,7 +68,16 @@ namespace SnakeGame
                 Grid.SetRow(stackPanel, body.y);
                 gameGrid.Children.Add(stackPanel);
             }
+
+            // Проверка, съела ли змея яблоко
+            if (Snake.SnakeBody[0].x == _currentApple.X && Snake.SnakeBody[0].y == _currentApple.Y)
+            {
+                _score++;
+                scoreText.Text = _score.ToString();
+                AddAppleToField();
+            }
         }
+
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -99,43 +119,24 @@ namespace SnakeGame
                 gameGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            //  сегменты змейки, еду и другие элементы игры в ячейки сетки
-
+            AddAppleToField();
         }
 
-       /* private Rectangle CreateSnakeSegment(int row, int column)
+        private void GenerateAppleCoordinates(out int x, out int y)
         {
-            Rectangle segment = new Rectangle
-            {
-                Width = CalculateCellSize(),
-                Height = CalculateCellSize(),
-                Fill = Brushes.Green
-            };
-
-            Grid.SetRow(segment, row);
-            Grid.SetColumn(segment, column);
-
-            return segment;
+            x = _random.Next(0, Columns);
+            y = _random.Next(0, Rows);
         }
 
-        private Rectangle CreateFood(int row, int column)
+        private void AddAppleToField()
         {
-            Rectangle food = new Rectangle
-            {
-                Width = CalculateCellSize(),
-                Height = CalculateCellSize(),
-                Fill = Brushes.Red
-            };
+            GenerateAppleCoordinates(out int x, out int y);
 
-            Grid.SetRow(food, row);
-            Grid.SetColumn(food, column);
+            _currentApple = new Apple(x, y, new StackPanel() { Background = (Brush)new BrushConverter().ConvertFromString("Red")});
 
-            return food;
+            Grid.SetColumn(_currentApple.AppleImage, _currentApple.X);
+            Grid.SetRow(_currentApple.AppleImage, _currentApple.Y);
+            gameGrid.Children.Add(_currentApple.AppleImage);
         }
-
-        private double CalculateCellSize()
-        {
-            return gameGrid.ActualWidth / Columns;
-        }*/
     }
 }
