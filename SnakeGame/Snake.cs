@@ -79,5 +79,14 @@ namespace SnakeGame
         {
             return dir;
         }
+
+        public void Grow()
+        {
+            // Координаты последней части змейки
+            int lastX = SnakeBody[SnakeBody.Count - 1].x;
+            int lastY = SnakeBody[SnakeBody.Count - 1].y;
+
+            SnakeBody.Add(new Body() { x = lastX, y = lastY }); // Добавляем новую часть змейки в конец, с координатами последней части
+        }
     }
 }

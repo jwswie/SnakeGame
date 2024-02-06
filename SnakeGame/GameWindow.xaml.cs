@@ -19,7 +19,7 @@ namespace SnakeGame
     /// </summary>
     public partial class GameWindow : Window
     {
-        private int _score;
+        static public int _score;
         private const int Rows = 9;
         private const int Columns = 9;
         private Random _random = new Random();
@@ -48,8 +48,16 @@ namespace SnakeGame
                 });
                 await Task.Delay(500);
             } while (Snake.MoveSnake());
-            MessageBox.Show("End of the game");
-            this.Close();
+
+            Dispatcher.Invoke(() =>
+            {
+                MessageBox.Show("Game Over", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                MainWindow main = new MainWindow();
+                main.Show();
+
+                this.Close();
+            });
         }
 
         private void DrawSnake()
@@ -75,6 +83,8 @@ namespace SnakeGame
                 _score++;
                 scoreText.Text = _score.ToString();
                 AddAppleToField();
+
+                Snake.Grow(); // Увеличиваем длину змейки
             }
         }
 
